@@ -1,0 +1,111 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: center;
+}
+
+.text p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: var(--body);
+}
+
+.text p:last-child { margin-bottom: 0; }
+
+.imageWrap {
+  position: relative;
+}
+
+.imageGlow {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1), transparent 70%);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.imageWrap:hover .imageGlow { opacity: 1; }
+
+.imagePlaceholder {
+  width: 280px;
+  height: 320px;
+  background: var(--neutral-primary-medium);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--body-subtle);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.imagePlaceholder:hover {
+  border-color: var(--border-brand);
+  box-shadow: var(--glow-brand);
+}
+
+.imagePlaceholder svg {
+  width: 48px;
+  height: 48px;
+  color: var(--border-default-strong);
+}
+
+.imagePlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.imagePlaceholder::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(99, 102, 241, 0.04), transparent 60%);
+  animation: rotateGradient 10s linear infinite;
+  pointer-events: none;
+}
+
+.socialOverlay {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.socialOverlay a {
+  color: var(--body-subtle);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.socialOverlay a:hover {
+  color: var(--brand);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .imagePlaceholder {
+    width: 200px;
+    height: 240px;
+    margin: 0 auto;
+  }
+}
