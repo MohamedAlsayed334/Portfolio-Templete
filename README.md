@@ -6,7 +6,7 @@ A fully-featured **portfolio template** built with **Next.js (App Router)** and 
 
 ---
 
-## Features
+## ✨ Features
 
 ### Public Portfolio
 - **Hero** — Name, title, tagline, resume download
@@ -27,7 +27,7 @@ A fully-featured **portfolio template** built with **Next.js (App Router)** and 
 
 ---
 
-## Prerequisites
+## 📦 Prerequisites
 
 - **Node.js** 18+ (recommended: 20 LTS)
 - A **Supabase** account (free tier)
@@ -36,16 +36,16 @@ A fully-featured **portfolio template** built with **Next.js (App Router)** and 
 
 ---
 
-## Quick Start
+## ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourusername/Portfolio-Templete.git
+git clone https://github.com/MohamedAlsayed334/Portfolio-Templete.git
 cd Portfolio-Templete
 npm install
 cp .env.example .env
 ```
 
-Then follow the setup guides below to configure Supabase and EmailJS.
+> 🚧 <b style="color: red" >Then follow the setup guides below to configure Supabase and EmailJS.</b>
 
 ---
 
@@ -53,11 +53,25 @@ Then follow the setup guides below to configure Supabase and EmailJS.
 
 ### 1. Supabase Setup
 
-1. Create a project at [supabase.com](https://supabase.com)
+1. Create a project at <a href="https://supabase.com" target="_blank">supabase.com</a>
 2. Go to **SQL Editor**, paste and run the contents of `src/data/schema.sql`
-3. Go to **Authentication → Providers → Email** and enable email/password auth
-4. Go to **Authentication → Users** and create an admin user (this will be your login)
-5. Find your credentials in **Settings → API** and add them to `.env`:
+3. Go to **Authentication → Sign in/Providers → Email** and enable email/password auth
+4. 🚨<b style="color: red" > Important : </b>
+   <br>
+   <mark>
+   1- You must Disable **Allow new users to sign up** as you don't want anyone to make account (In case any security issue)
+   <br>
+   <br>
+   2- You must Disable **Confirm email** as you don't want to verify email (Supabase sometimes doesn't send email verification)
+  </mark>
+
+5. Go to **Authentication → Users** and create an admin user (this will be your login)
+   
+6. Find your credentials in **Project Settings**
+   - **1- Get SUPABASE_ANON_KEY** : **API Keys→ Publishable key -> Copy**
+ - >⚠️ <b style="color: red" > Important : </b> **Don't get the Secret keys** we need the **Publishable key**
+
+   - **2- Get SUPABASE_URL** : **Data API → API URL(copyy  the URL)**
 
 ```env
 SUPABASE_URL=https://your-project.supabase.co
@@ -66,7 +80,7 @@ SUPABASE_ANON_KEY=your-anon-key-here
 
 ### 2. EmailJS Setup
 
-1. Sign up at [emailjs.com](https://www.emailjs.com/)
+1. Sign up at <a  href="https://www.emailjs.com/" target="_blank">EmailJS</a>
 2. Go to **Email Services** and connect an email service (Gmail, Outlook, etc.)
 3. Go to **Email Templates** and create a template with these variables:
    - `{{from_name}}` — sender name
@@ -224,10 +238,17 @@ The contact form uses **EmailJS** to send messages directly to your email. All E
 
 ## License
 
-MIT — free for personal or commercial use.
 
+- This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.   
+<a href="https://github.com/yourusername/yourproject/blob/main/LICENSE">MIT License</a>
 ---
 
 ## Contributing
 
 Open an issue or PR on GitHub.
+# 👨‍💻 Author
+
+**Mohamed AlSayed**
+---
+Made with ❤️ by me
+[GitHub](https://github.com/MohamedAlsayed334)
