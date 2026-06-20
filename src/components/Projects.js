@@ -25,7 +25,7 @@ export default function Projects() {
                 ))}
               </div>
               <ul className={styles.features}>
-                {project.features.slice(0, 3).map((f, j) => (
+                {project.features.map((f, j) => (
                   <li key={j}>{f}</li>
                 ))}
               </ul>
