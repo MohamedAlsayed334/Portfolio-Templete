@@ -39,11 +39,11 @@ export default function Hero() {
         <span className={styles.greeting}>Hi, I&apos;m</span>
         <h1 className={styles.name}>
           <span className={styles.nameMain}>
-            <span className={styles.nameHighlight}>{hero?.name || 'Mohamed Alsayed'}</span>
+            <span className={styles.nameHighlight}>{hero?.name || 'Your Name'}</span>
           </span>
         </h1>
         <p className={styles.title}>
-          {hero?.title || 'Sophomore @ FCAI Cairo University'}
+          {hero?.title || 'Your Title'}
         </p>
         <p className={styles.subtitle}>{hero?.subtitle}</p>
         <div className={styles.buttons}>
