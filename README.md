@@ -9,185 +9,89 @@ A fully-featured **portfolio template** built with **Next.js (App Router)** and 
 ## Features
 
 ### Public Portfolio
-- **Hero** — Name, title, tagline
+- **Hero** — Name, title, tagline, resume download
 - **About** — Bio with image and paragraphs
 - **Education** — Timeline-style education cards (image optional)
 - **Experience** — Work experience timeline (image optional)
 - **Skills** — Categorized skill tags
 - **Projects** — Project cards with tech stack, features, and GitHub links
-- **Contact** — Social links (WhatsApp, Email, GitHub, LinkedIn, Facebook)
-- Scroll-triggered reveal animations
-- Smooth scrolling navigation
-- Responsive design (mobile + desktop)
+- **Contact** — Contact form (via EmailJS) + social links
+- Scroll-triggered reveal animations, smooth scrolling, responsive design
 
 ### Admin Panel (`/admin`)
 - Secure login with Supabase email/password auth
-- Dashboard overview with content counts
-- Edit **Hero, About, Education, Experience, Skills, Projects, Contact** via forms
+- Edit all content via forms: Hero, About, Education, Experience, Skills, Projects, Contact
 - Tag input for skills, tech stacks, bullet lists
 - Image URL fields
 - Reorderable items (via `order_index`)
-
-### Tech Stack
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js (App Router) |
-| UI | React, CSS Modules |
-| Database | Supabase (PostgreSQL) |
-| Auth | Supabase Auth (email/password) |
-| Deployment | Vercel |
 
 ---
 
 ## Prerequisites
 
 - **Node.js** 18+ (recommended: 20 LTS)
-- A **Supabase** account (free tier works)
-- **npm** (comes with Node.js)
+- A **Supabase** account (free tier)
+- An **EmailJS** account (free tier)
+- **npm**
 
 ---
 
 ## Quick Start
 
-### 1. Clone the repository
-
 ```bash
-git clone https://github.com/MohamedAlsayed334/Portfolio-Templete.git
+git clone https://github.com/yourusername/Portfolio-Templete.git
 cd Portfolio-Templete
-```
-
-### 2. Install dependencies
-
-```bash
 npm install
+cp .env.example .env
 ```
 
-### 3. Set up Supabase
+Then follow the setup guides below to configure Supabase and EmailJS.
+
+---
+
+## Setup
+
+### 1. Supabase Setup
 
 1. Create a project at [supabase.com](https://supabase.com)
-2. Go to the **SQL Editor** and paste + run the contents of `src/data/schema.sql`
+2. Go to **SQL Editor**, paste and run the contents of `src/data/schema.sql`
 3. Go to **Authentication → Providers → Email** and enable email/password auth
 4. Go to **Authentication → Users** and create an admin user (this will be your login)
+5. Find your credentials in **Settings → API** and add them to `.env`:
 
-### 4. Configure environment variables
-
-```bash
-cp  .env
-```
-
-Edit `.env` and fill in your Supabase credentials:
-
-```
+```env
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
-You can find both values in **Supabase → Settings → API**.
+### 2. EmailJS Setup
 
-### 5. Run the development server
+1. Sign up at [emailjs.com](https://www.emailjs.com/)
+2. Go to **Email Services** and connect an email service (Gmail, Outlook, etc.)
+3. Go to **Email Templates** and create a template with these variables:
+   - `{{from_name}}` — sender name
+   - `{{from_email}}` — sender email
+   - `{{subject}}` — message subject
+   - `{{message}}` — message body
+4. Go to **Account → API Keys** and copy your public key
+5. Add the credentials to `.env`:
+
+```env
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+> The `NEXT_PUBLIC_` prefix makes these variables available on the client side (required for EmailJS).
+
+### 3. Run
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your portfolio.
+Open [http://localhost:3000](http://localhost:3000) for your portfolio.  
 Open [http://localhost:3000/admin](http://localhost:3000/admin) and log in with the admin user you created.
-
----
-
-## Project Structure
-
-```
-Portfolio-Templete/
-├── public/                    # Static assets (images, etc.)
-├── src/
-│   ├── app/
-│   │   ├── admin/             # Admin panel pages
-│   │   │   ├── login/         # Login page
-│   │   │   ├── hero/          # Edit hero section
-│   │   │   ├── about/         # Edit about section
-│   │   │   ├── education/     # Edit education entries
-│   │   │   ├── experience/    # Edit experience entries
-│   │   │   ├── skills/        # Edit skill categories
-│   │   │   ├── projects/      # Edit projects
-│   │   │   ├── contact/       # Edit contact info
-│   │   │   ├── layout.js      # Admin layout with sidebar
-│   │   │   └── page.js        # Admin dashboard
-│   │   ├── api/               # API routes
-│   │   │   ├── admin/[table]/ # CRUD proxy to Supabase (authenticated)
-│   │   │   ├── public/[table]/# Read-only proxy to Supabase (public)
-│   │   │   └── auth/          # Login and session verification
-│   │   ├── globals.css        # Global styles
-│   │   ├── layout.js          # Root layout
-│   │   └── page.js            # Home page (portfolio)
-│   ├── components/            # React components
-│   │   ├── ui/                # Reusable UI components (Button, Section, Icons)
-│   │   ├── admin/             # Admin-specific components (TagInput)
-│   │   ├── Hero.js
-│   │   ├── About.js
-│   │   ├── Education.js
-│   │   ├── Experience.js
-│   │   ├── Skills.js
-│   │   ├── Projects.js
-│   │   ├── Contact.js
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   ├── ScrollReveal.js
-│   │   └── ...
-│   ├── data/                  # Fallback data & SQL schema
-│   │   ├── content.js         # Fallback content (edit for defaults)
-│   │   ├── projects.js        # Fallback projects
-│   │   └── schema.sql         # Supabase table definitions
-│   └── lib/
-│       ├── api.js             # API client (auth, admin, public)
-│       ├── content-context.js # React context for loading content
-│       └── utils.js           # Utility functions
-├── .env.example               # Environment variable template
-├── .gitignore
-├── package.json
-└── next.config.mjs
-```
-
----
-
-## Customization Guide
-
-### Content via Supabase (admin panel)
-
-The easiest way: log into `/admin` and edit everything through the forms.
-
-### Content via fallback files
-
-If Supabase is not configured, the site falls back to data in `src/data/content.js` and `src/data/projects.js`. Edit these files to set default content.
-
-### Styling
-
-- **Global styles**: `src/app/globals.css`
-- **Admin styles**: `src/app/admin/admin.css`
-- **Component styles**: Each component has a co-located `.module.css` file (e.g., `Hero.module.css`)
-
-### Layout
-
-The portfolio sections are assembled in `src/app/page.js`. Add, remove, or reorder sections there.
-
-### Images
-
-Place your images in the `public/images/` directory and reference them as `/images/your-image.webp`.
-
-> **Note**: Images in **Education** and **Experience** sections are optional. If you leave the image path empty, the image block is hidden and the content adjusts gracefully. If an image path is provided but broken, it silently hides without breaking the layout.
-
----
-
-## Deployment
-
-### Deploy to Vercel
-
-1. Push the repo to GitHub
-2. Import the project in [Vercel](https://vercel.com/new)
-3. Add environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`)
-4. Deploy — that's it!
-
-The `vercel.json` is already configured for Next.js.
 
 ---
 
@@ -197,8 +101,93 @@ The `vercel.json` is already configured for Next.js.
 |----------|-------------|----------|
 | `SUPABASE_URL` | Your Supabase project URL | Yes |
 | `SUPABASE_ANON_KEY` | Your Supabase anon/public key | Yes |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | EmailJS service ID | Yes (for contact form) |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | EmailJS template ID | Yes (for contact form) |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | EmailJS public API key | Yes (for contact form) |
 
-> **Note**: These are server-side only (no `NEXT_PUBLIC_` prefix). The anon key is safe to expose per Supabase docs since RLS policies protect your data.
+---
+
+## Project Structure
+
+```
+Portfolio-Templete/
+├── public/                     # Static assets (images, etc.)
+├── src/
+│   ├── app/
+│   │   ├── admin/              # Admin panel pages
+│   │   │   ├── login/
+│   │   │   ├── hero/
+│   │   │   ├── about/
+│   │   │   ├── education/
+│   │   │   ├── experience/
+│   │   │   ├── skills/
+│   │   │   ├── projects/
+│   │   │   ├── contact/
+│   │   │   ├── layout.js
+│   │   │   └── page.js         # Dashboard
+│   │   ├── api/
+│   │   │   ├── admin/[table]/  # CRUD proxy (authenticated)
+│   │   │   ├── public/[table]/ # Read-only proxy (public)
+│   │   │   └── auth/           # Login & session
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   └── page.js             # Home page
+│   ├── components/
+│   │   ├── ui/                 # Reusable UI (Button, Section, Icons)
+│   │   ├── admin/              # Admin components (TagInput)
+│   │   ├── Hero.js, About.js, Education.js, ...
+│   │   └── Contact.js          # Contact form (EmailJS)
+│   ├── data/
+│   │   ├── content.js          # Fallback content
+│   │   ├── projects.js         # Fallback projects
+│   │   └── schema.sql          # Supabase SQL schema
+│   └── lib/
+│       ├── api.js              # API client
+│       ├── content-context.js  # Content loading context
+│       └── utils.js
+├── .env.example
+├── .gitignore
+├── package.json
+├── next.config.mjs
+└── vercel.json
+```
+
+---
+
+## Customization Guide
+
+### Content
+
+- **Via admin panel** — log into `/admin` and edit everything through forms
+- **Via fallback files** — edit `src/data/content.js` and `src/data/projects.js` (used when Supabase is unavailable)
+
+### Images
+
+- Place images in `public/images/` and reference as `/images/your-image.webp`
+- Images in **Education** and **Experience** are optional — leave the path empty to hide the image block
+
+### Styling
+
+- **Global styles**: `src/app/globals.css`
+- **Admin styles**: `src/app/admin/admin.css`
+- **Component styles**: co-located `.module.css` files
+
+### Layout
+
+Sections are assembled in `src/app/page.js`. Add, remove, or reorder sections there.
+
+---
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push the repo to GitHub
+2. Import in [Vercel](https://vercel.com/new)
+3. Add all environment variables from `.env`
+4. Deploy
+
+The `vercel.json` is pre-configured for Next.js.
 
 ---
 
@@ -206,40 +195,39 @@ The `vercel.json` is already configured for Next.js.
 
 ### API Architecture
 
-The app uses **API routes** as a proxy between the browser and Supabase:
-
 ```
 Browser → Next.js API Route → Supabase REST API
 ```
 
-- **Public routes** (`/api/public/[table]`) — read-only, use the anon key
-- **Admin routes** (`/api/admin/[table]`) — authenticated, use the user's JWT token
-- **Auth routes** (`/api/auth/login`, `/api/auth/me`) — authenticate with Supabase Auth
-
-This approach keeps Supabase credentials server-side and allows proper auth validation.
+- **Public routes** (`/api/public/[table]`) — read-only, anon key
+- **Admin routes** (`/api/admin/[table]`) — authenticated, user JWT
+- **Auth routes** (`/api/auth/login`, `/api/auth/me`) — Supabase Auth
 
 ### Content Loading
 
-1. On page load, React fetches data from `/api/public/[table]`
-2. If Supabase is configured and reachable, data comes from the database
-3. If Supabase is unavailable (or not configured), the app falls back to local data files
+1. React fetches data from `/api/public/[table]` on page load
+2. If Supabase is configured and reachable → data from DB
+3. If unavailable → falls back to local data files
 
 ### Admin Authentication
 
-1. Admin logs in via email/password at `/admin/login`
-2. Supabase returns `access_token` and `refresh_token`
-3. Tokens are stored in `localStorage`
-4. All admin API requests include the JWT in the `Authorization` header
-5. The server verifies the token with Supabase Auth before proxying requests
+1. Login at `/admin/login` via email/password
+2. Tokens stored in `localStorage`
+3. Admin API requests include JWT in `Authorization` header
+4. Server verifies token with Supabase Auth before proxying
+
+### Contact Form
+
+The contact form uses **EmailJS** to send messages directly to your email. All EmailJS credentials are configured via environment variables — the form never exposes your email address publicly.
 
 ---
 
 ## License
 
-MIT — feel free to use this for personal or commercial projects.
+MIT — free for personal or commercial use.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or have a feature request, open an issue or submit a PR.
+Open an issue or PR on GitHub.

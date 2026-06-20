@@ -22,15 +22,15 @@ export default function Contact() {
     const form = formRef.current
     try {
       const response = await emailjs.send(
-        'service_lw9tfra',
-        'template_czul51s',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name.value,
           from_email: form.email.value,
           subject: form.subject.value,
           message: form.message.value,
         },
-        'ZpwXnIswvTFYwx_7N'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       )
       if (response.status === 200) {
         setStatus('success')
