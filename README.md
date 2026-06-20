@@ -57,21 +57,16 @@ cp .env.example .env
 2. Go to **SQL Editor**, paste and run the contents of `src/data/schema.sql`
 3. Go to **Authentication → Sign in/Providers → Email** and enable email/password auth
 > [!CAUTION]
-> 🚨<b style="color: red" > Important : </b>
-> <br>
->  <mark>
->  1- You must Disable **Allow new users to sign up** as you don't want anyone to make account (In case any security issue)
->  <br>
->  <br>
->  2- You must Disable **Confirm email** as you don't want to verify email (Supabase sometimes doesn't send email verification)
-> </mark>
+> **Important:**
+> 1. You must disable **Allow new users to sign up** as you don't want anyone to make an account (in case of any security issue).
+> 2. You must disable **Confirm email** as you don't want to verify emails (Supabase sometimes doesn't send email verification).
 
 4. Go to **Authentication → Users** and create an admin user (this will be your login)
    
 5. Find your credentials in **Project Settings**
    - **1- Get SUPABASE_ANON_KEY** : **API Keys→ Publishable key -> Copy**
 > [!CAUTION]
->⚠️ <b style="color: red" > Important : </b> **Don't get the Secret keys** we need the **Publishable key**
+> **Important:** **Don't get the Secret keys!** We only need the **Publishable key**.
 
    - **2- Get SUPABASE_URL** : **Data API → API URL(copyy  the URL)**
 
