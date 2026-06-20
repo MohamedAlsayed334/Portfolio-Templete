@@ -11,8 +11,8 @@ A fully-featured **portfolio template** built with **Next.js (App Router)** and 
 ### Public Portfolio
 - **Hero** — Name, title, tagline
 - **About** — Bio with image and paragraphs
-- **Education** — Timeline-style education cards
-- **Experience** — Work experience timeline
+- **Education** — Timeline-style education cards (image optional)
+- **Experience** — Work experience timeline (image optional)
 - **Skills** — Categorized skill tags
 - **Projects** — Project cards with tech stack, features, and GitHub links
 - **Contact** — Social links (WhatsApp, Email, GitHub, LinkedIn, Facebook)
@@ -173,6 +173,8 @@ The portfolio sections are assembled in `src/app/page.js`. Add, remove, or reord
 ### Images
 
 Place your images in the `public/images/` directory and reference them as `/images/your-image.webp`.
+
+> **Note**: Images in **Education** and **Experience** sections are optional. If you leave the image path empty, the image block is hidden and the content adjusts gracefully. If an image path is provided but broken, it silently hides without breaking the layout.
 
 ---
 

@@ -35,6 +35,7 @@ export const education = [
       'Brief description of your school achievements',
     ],
     achievement: 'Key Achievement',
+    image: '/images/school.webp',
   },
 ]
 
@@ -43,7 +44,7 @@ export const experience = [
     title: 'Job Title - Intern',
     company: 'Company Name',
     period: 'Month Year',
-    image: '/images/company_logo.webp',
+    image: '/images/company.webp',
     details: [
       'Describe your responsibilities and achievements',
       'Highlight key technologies or skills used',

@@ -1,13 +1,13 @@
 'use client'
 
 import Section, { SectionHeader } from './ui/Section'
-import { User } from './ui/Icons'
 import { useEducation } from '@/lib/content-context'
 import styles from './Education.module.css'
 import { cn } from '@/lib/utils'
 
 export default function Education() {
   const education = useEducation()
+  if (!education?.length) return null
 
   return (
     <Section id="education">
@@ -15,24 +15,16 @@ export default function Education() {
         <h2>Education</h2>
       </SectionHeader>
       <div className={styles.grid}>
-        {education?.map((item, i) => (
+        {education.map((item, i) => (
           <div
             key={i}
             className={cn(styles.card, item.image && styles.cardWithImage, i === 0 && styles.cardFeatured)}
           >
-            {item.image && (
+            {item.image ? (
               <div className={styles.imageWrap}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
-                />
-                <div style={{ display: 'none' }}>
-                  <User />
-                  <span>{item.title}</span>
-                </div>
+                <img src={item.image} alt={item.title} />
               </div>
-            )}
+            ) : null}
             <div className={styles.body}>
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.degree}>{item.degree}</p>

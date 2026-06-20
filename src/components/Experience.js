@@ -22,7 +22,7 @@ export default function Experience() {
                 <img
                   src={item.image}
                   alt={item.company}
-                  onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }}
+                  onError={(e) => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'block' }}
                 />
               ) : null}
               <Briefcase style={item.image ? { display: 'none' } : {}} />
